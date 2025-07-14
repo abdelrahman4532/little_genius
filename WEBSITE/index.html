@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مهارات الصغير</title>
+  <link rel="icon" href="icon.jpeg" type="image/jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <h2 class="txt1">مهارات الصغير</h2>
+    <a href="https://www.tiktok.com/@little_genius75" target="_blank">
+      <img src="icon.jpeg" alt="مهارات الصغير" class="icon" />
+    </a>
+  </header>
+
+  <div class="boxs" id="projects-container">
+    
+  </div>
+
+  <script>
+    fetch("https://api.sheetbest.com/sheets/2f6c8472-0f1f-4b24-93f2-4baf4e842e1d")
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("projects-container");
+
+        data.forEach(proj => {
+          const box = document.createElement("div");
+          box.className = "box1";
+
+          box.innerHTML = `
+            <a href="${proj.video}" target="_blank">
+              <img src="${proj.image}" alt="${proj.title}" class="image1">
+            </a>
+            <p class="description">
+              ${proj.title}<br>
+              <span class="hashtags">${proj.tags}</span>
+            </p>
+            <div class="btn-wrapper">
+              <a href="${proj.code}" class="code-btn" target="_blank">الكود</a><br>
+              <a href="${proj.diagram}" class="code-btn" target="_blank">الرسم التخطيطي</a>
+            </div>
+          `;
+          container.appendChild(box);
+        });
+      })
+      .catch(error => {
+        document.getElementById("projects-container").innerHTML = "<p style='color:red;'>حدث خطأ أثناء تحميل المشاريع</p>";
+        console.error("خطأ في جلب البيانات:", error);
+      });
+  </script>
+
+</body>
+</html>
