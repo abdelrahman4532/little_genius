@@ -5,144 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>مهارات الصغير</title>
   <link rel="icon" href="icon.jpeg" type="image/jpeg" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://hcaptcha.com/1/api.js" async defer></script>
-
-  <style>
-    /* ==== الأساسيات ==== */
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:'Cairo',sans-serif;
-      background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-      min-height:100vh;color:#fff;overflow-x:hidden
-    }
-    a{text-decoration:none;color:inherit}
-
-    /* ==== شريط التنقّل ==== */
-    .navbar{
-      width:100%;display:flex;align-items:center;justify-content:space-between;
-      padding:15px 8vw;background:rgba(255,255,255,.1);backdrop-filter:blur(6px);
-      border-bottom:1px solid rgba(255,255,255,.3)
-    }
-    .txt1{font-size:1.8rem;font-weight:700;white-space:nowrap}
-    .icon{width:45px;height:45px;border-radius:50%;object-fit:cover;transition:.3s}
-    .icon:hover{transform:scale(1.1)}
-
-    /* ==== صناديق المشاريع ==== */
-    #projects-container{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-      gap:25px;padding:6vh 8vw
-    }
-    .box1{
-      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
-      border-radius:18px;overflow:hidden;backdrop-filter:blur(4px);
-      transition:.4s box-shadow,.4s transform;position:relative
-    }
-    .box1:hover{transform:translateY(-6px);box-shadow:0 12px 25px rgba(0,0,0,.35)}
-    .image1{width:100%;height:170px;object-fit:cover}
-    .description{padding:15px;font-size:1rem;line-height:1.6}
-    .hashtags{color:#00ffd5;font-size:.85rem}
-    .btn-wrapper{display:flex;gap:10px;justify-content:center;padding:0 0 18px}
-    .code-btn{
-      padding:6px 16px;border-radius:30px;font-size:.9rem;font-weight:600;
-      background:#00ffd5;color:#00333d;transition:.3s
-    }
-    .code-btn:hover{background:#00ffb3;color:#001a1f}
-
-    /* ==== غطاء التحقّق ==== */
-    #captcha-overlay{
-      position:fixed;inset:0;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;z-index:999;
-      background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
-      transition:opacity .6s ease,visibility .6s ease
-    }
-    #captcha-overlay.hide{opacity:0;visibility:hidden}
-    .captcha-box{
-      background:rgba(255,255,255,.1);border:2px solid #fff;border-radius:20px;
-      padding:40px 30px;text-align:center;max-width:340px;width:88%;
-      box-shadow:0 0 25px rgba(255,255,255,.25);animation:fadeInUp 1s
-    }
-    .captcha-box h2{font-size:1.9rem;margin-bottom:12px}
-    .captcha-box p{font-size:1rem;margin-bottom:25px}
-
-    /* ==== أنيميشن ==== */
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-
-    /* ==== استجابة الجوال ==== */
-    @media(max-width:500px){
-      .txt1{font-size:1.4rem}
-      .captcha-box h2{font-size:1.6rem}
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-  <!-- ===== شريط علوي ===== -->
-  <header class="navbar">
-    <h2 class="txt1">مهارات الصغير</h2>
-    <a href="https://www.tiktok.com/@little_genius75" target="_blank">
-      <img src="icon.jpeg" alt="مهارات الصغير" class="icon" />
-    </a>
-  </header>
-
-  <!-- ===== حاوية المشاريع (مخفيّة حتى ينجح التحقّق) ===== -->
-  <div class="boxs" id="projects-container" style="visibility:hidden;opacity:0;transition:.8s"></div>
-
-  <!-- ===== غطاء التحقّق بـ hCaptcha ===== -->
-  <div id="captcha-overlay">
-    <div class="captcha-box">
-      <h2>👋 مرحبًا بك!</h2>
-      <p>🔒 الرجاء تأكيد أنك إنسان</p>
-      <form id="captcha-form">
-        <div class="h-captcha" data-sitekey="533e9f00-5bfe-4efc-afd4-4212aaf6c31e" data-callback="onSuccess"></div>
-      </form>
-    </div>
+  <!-- رسومات متحركة في الخلفية -->
+  <div class="floating-shapes">
+    <div class="shape" style="width: 100px; height: 100px; background: var(--primary-color); top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="shape" style="width: 150px; height: 150px; background: var(--secondary-color); top: 60%; left: 80%; animation-delay: 2s;"></div>
+    <div class="shape" style="width: 80px; height: 80px; background: var(--accent-color); top: 80%; left: 20%; animation-delay: 4s;"></div>
   </div>
 
-  <!-- ===== جافاسكريبت ===== -->
+  <!-- صفحة التحقق -->
+  <div class="captcha-section" id="captcha-section">
+    <h1 class="welcome-title">👋 مرحبًا بك في مهارات الصغير</h1>
+    <p class="welcome-subtitle">🔒 منصة تعليمية تفاعلية لتعليم الأطفال البرمجة والمهارات الرقمية</p>
+    <form class="captcha-form" id="captcha-form">
+      <div class="h-captcha" data-sitekey="533e9f00-5bfe-4efc-afd4-4212aaf6c31e" data-callback="onSuccess"></div>
+    </form>
+  </div>
+
+  <!-- صفحة الهوم -->
+  <div id="home-content" style="display:none;">
+    <header class="navbar">
+      <h2 class="txt1">مهارات الصغير</h2>
+      <a href="https://www.tiktok.com/@little_genius75" target="_blank">
+        <img src="icon.jpeg" alt="مهارات الصغير" class="icon" />
+      </a>
+    </header>
+
+    <div class="boxs" id="projects-container"></div>
+  </div>
+
   <script>
-    /* جلب المشاريع من Google Sheet عبر SheetBest */
-    function loadProjects(){
+    function onSuccess() {
+      document.getElementById("captcha-section").style.display = "none";
+      document.getElementById("home-content").style.display = "block";
+
       fetch("https://api.sheetbest.com/sheets/2f6c8472-0f1f-4b24-93f2-4baf4e842e1d")
-        .then(res=>res.json())
-        .then(data=>{
-          const container=document.getElementById("projects-container");
-          data.forEach(proj=>{
-            const box=document.createElement("div");
-            box.className="box1";
-            box.innerHTML=`
-              <a href="${proj.video}" target="_blank">
-                <img src="${proj.image}" alt="${proj.title}" class="image1">
-              </a>
-              <p class="description">
-                ${proj.title}<br>
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById("projects-container");
+
+          data.forEach((proj, index) => {
+            const box = document.createElement("div");
+            box.className = "box1 fade-in";
+            box.style.animationDelay = `${index * 0.2}s`;
+            
+            box.innerHTML = `
+              <div class="image-container">
+                <a href="${proj.video}" target="_blank">
+                  <img src="${proj.image}" alt="${proj.title}" class="image1">
+                </a>
+                <span class="project-badge">${proj.level || 'مشروع'}</span>
+              </div>
+              <div class="description">
+                <h3 class="project-title">${proj.title}</h3>
                 <span class="hashtags">${proj.tags}</span>
-              </p>
+              </div>
               <div class="btn-wrapper">
-                <a href="${proj.code}" class="code-btn" target="_blank">الكود</a>
-                <a href="${proj.diagram}" class="code-btn" target="_blank">الرسم التخطيطي</a>
+                <a href="${proj.code}" class="code-btn" target="_blank"><i class="fas fa-code"></i> الكود</a>
+                <a href="${proj.diagram}" class="code-btn" target="_blank"><i class="fas fa-project-diagram"></i> الرسم التخطيطي</a>
               </div>
             `;
             container.appendChild(box);
           });
-          /* إظهار الحاوية بسلاسة */
-          container.style.visibility="visible";
-          container.style.opacity="1";
         })
-        .catch(err=>{
-          document.getElementById("projects-container").innerHTML="<p style='color:red;'>حدث خطأ أثناء تحميل المشاريع</p>";
-          console.error("خطأ في جلب البيانات:",err);
+        .catch(error => {
+          document.getElementById("projects-container").innerHTML = `
+            <div class="box1" style="grid-column:1/-1">
+              <p style="color:red; font-size:18px;">حدث خطأ أثناء تحميل المشاريع</p>
+              <p style="color:var(--text-light); margin-top:10px;">الرجاء المحاولة لاحقاً أو التأكد من اتصال الإنترنت</p>
+            </div>
+          `;
+          console.error("خطأ في جلب البيانات:", error);
         });
     }
 
-    /* استدعاء بعد نجاح Captcha */
-    function onSuccess(){
-      /* إخفاء الغطاء */
-      document.getElementById("captcha-overlay").classList.add("hide");
-      /* تحميل المشاريع */
-      loadProjects();
+    // إضافة تأثير العوامات المتحركة بشكل ديناميكي
+    function addFloatingShapes() {
+      const shapesContainer = document.querySelector('.floating-shapes');
+      const colors = ['var(--primary-color)', 'var(--secondary-color)', 'var(--accent-color)'];
+      
+      for (let i = 0; i < 5; i++) {
+        const shape = document.createElement('div');
+        shape.className = 'shape';
+        const size = Math.floor(Math.random() * 100) + 50;
+        const top = Math.random() * 100;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 8;
+        const duration = Math.floor(Math.random() * 20) + 10;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        shape.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          background: ${color};
+          top: ${top}%;
+          left: ${left}%;
+          animation-delay: ${delay}s;
+          animation-duration: ${duration}s;
+        `;
+        
+        shapesContainer.appendChild(shape);
+      }
     }
-  </script>
 
+    // تشغيل الوظائف عند تحميل الصفحة
+    window.addEventListener('load', addFloatingShapes);
+  </script>
 </body>
 </html>
